@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -24,9 +25,11 @@ import com.blogspot.softlabsja.iiucstudentapp.LoginAndCookies.Cookies;
 import com.blogspot.softlabsja.iiucstudentapp.LoginAndCookies.UpdateSession;
 import com.blogspot.softlabsja.iiucstudentapp.R;
 import com.blogspot.softlabsja.iiucstudentapp.helperClassFirebase;
+import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -41,8 +44,8 @@ import java.net.URL;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity implements BottomSheetDialog.BottomSheetListener {
-    ImageView backBtn, backBtn_p2, textShowBtn, textShowBtn2, textShowBtn3, textShowBtn4;
-    TextView pro_id_no, pro_date_of_b, pro_gender, pro_religion, pro_nationality, pro_Father_Name, pro_Mother_Name, pro_pre_Address, pro_per_Address, pro_number, pro_alt_number, pro_email,pro_birthC,pro_National_ID;
+    ImageView backBtn, backBtn_p2, textShowBtn, textShowBtn2, textShowBtn3, textShowBtn4,emailBtn,telephoneBtn;
+    TextView id_sub, pro_id_no, pro_date_of_b, pro_gender, pro_religion, pro_nationality, pro_Father_Name, pro_Mother_Name, pro_pre_Address, pro_per_Address, pro_number, pro_alt_number, pro_email,pro_birthC,pro_National_ID;
     LinearLayout text_hide, text_hide2, text_hide3, text_hide4;
     LinearLayout clickBtnText, clickBtnText2, clickBtnText3, clickBtnText4,BirthC_LL,National_ID_LL;
     ContentLoadingProgressBar loading;
@@ -54,6 +57,9 @@ public class ProfileActivity extends AppCompatActivity implements BottomSheetDia
     int isShowIMG = 0;
     int f = 0, f2 = 0, f3 = 0, f4 = 0;
     String profile_Link,number,alt_number,email,birthC,nationalID;
+
+    ImageView animImage;
+    private AVLoadingIndicatorView loading1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +112,12 @@ public class ProfileActivity extends AppCompatActivity implements BottomSheetDia
 
         loading = findViewById(R.id.loading_p);
 
+        animImage = findViewById(R.id.animImage);
+        loading1 = findViewById(R.id.loading);
+        id_sub = findViewById(R.id.id_sub);
+        telephoneBtn = findViewById(R.id.telephoneBtn);
+        emailBtn = findViewById(R.id.emailBtn);
+
         Intent intent = getIntent();
         if(intent != null){
             profile_Link = intent.getStringExtra("img_link");
@@ -123,12 +135,12 @@ public class ProfileActivity extends AppCompatActivity implements BottomSheetDia
             @Override
             public void onClick(View v) {
                 if (f % 2 == 0) {
-                    textShowBtn.setBackgroundResource(R.drawable.ic_arrow_down);
-                    clickBtnText.setBackgroundResource(R.drawable.rounded_corners_up_pro);
+                    textShowBtn.setImageResource(R.drawable.ic_arrow_down);
+                    //clickBtnText.setBackgroundResource(R.drawable.rounded_corners_up_pro);
                     text_hide.setVisibility(View.VISIBLE);
                 } else {
-                    textShowBtn.setBackgroundResource(R.drawable.ic_arrow_up);
-                    clickBtnText.setBackgroundResource(R.drawable.rounded_corners_pro);
+                    textShowBtn.setImageResource(R.drawable.ic_arrow_up);
+                    //clickBtnText.setBackgroundResource(R.drawable.rounded_corners_pro);
                     text_hide.setVisibility(View.GONE);
                 }
                 f++;
@@ -138,12 +150,12 @@ public class ProfileActivity extends AppCompatActivity implements BottomSheetDia
             @Override
             public void onClick(View v) {
                 if (f2 % 2 == 0) {
-                    textShowBtn2.setBackgroundResource(R.drawable.ic_arrow_down);
-                    clickBtnText2.setBackgroundResource(R.drawable.rounded_corners_up_pro);
+                    textShowBtn2.setImageResource(R.drawable.ic_arrow_down);
+                    //clickBtnText2.setBackgroundResource(R.drawable.rounded_corners_up_pro);
                     text_hide2.setVisibility(View.VISIBLE);
                 } else {
-                    textShowBtn2.setBackgroundResource(R.drawable.ic_arrow_up);
-                    clickBtnText2.setBackgroundResource(R.drawable.rounded_corners_pro);
+                    textShowBtn2.setImageResource(R.drawable.ic_arrow_up);
+                    //clickBtnText2.setBackgroundResource(R.drawable.rounded_corners_pro);
                     text_hide2.setVisibility(View.GONE);
                 }
                 f2++;
@@ -153,12 +165,12 @@ public class ProfileActivity extends AppCompatActivity implements BottomSheetDia
             @Override
             public void onClick(View v) {
                 if (f3 % 2 == 0) {
-                    textShowBtn3.setBackgroundResource(R.drawable.ic_arrow_down);
-                    clickBtnText3.setBackgroundResource(R.drawable.rounded_corners_up_pro);
+                    textShowBtn3.setImageResource(R.drawable.ic_arrow_down);
+                    //clickBtnText3.setBackgroundResource(R.drawable.rounded_corners_up_pro);
                     text_hide3.setVisibility(View.VISIBLE);
                 } else {
-                    textShowBtn3.setBackgroundResource(R.drawable.ic_arrow_up);
-                    clickBtnText3.setBackgroundResource(R.drawable.rounded_corners_pro);
+                    textShowBtn3.setImageResource(R.drawable.ic_arrow_up);
+                    //clickBtnText3.setBackgroundResource(R.drawable.rounded_corners_pro);
                     text_hide3.setVisibility(View.GONE);
                 }
                 f3++;
@@ -168,12 +180,12 @@ public class ProfileActivity extends AppCompatActivity implements BottomSheetDia
             @Override
             public void onClick(View v) {
                 if (f4 % 2 == 0) {
-                    textShowBtn4.setBackgroundResource(R.drawable.ic_arrow_down);
-                    clickBtnText4.setBackgroundResource(R.drawable.rounded_corners_up_pro);
+                    textShowBtn4.setImageResource(R.drawable.ic_arrow_down);
+                    //clickBtnText4.setBackgroundResource(R.drawable.rounded_corners_up_pro);
                     text_hide4.setVisibility(View.VISIBLE);
                 } else {
-                    textShowBtn4.setBackgroundResource(R.drawable.ic_arrow_up);
-                    clickBtnText4.setBackgroundResource(R.drawable.rounded_corners_pro);
+                    textShowBtn4.setImageResource(R.drawable.ic_arrow_up);
+                    //clickBtnText4.setBackgroundResource(R.drawable.rounded_corners_pro);
                     text_hide4.setVisibility(View.GONE);
                 }
                 f4++;
@@ -211,11 +223,13 @@ public class ProfileActivity extends AppCompatActivity implements BottomSheetDia
                                 loading.hide();
 
                                 student_Profile_img.setImageBitmap(bitmap);
-
+                                animImage.setImageBitmap(bitmap);
+                                loading1.hide();
                                 String name = t.get(1).select("tr").get(1).select("td").get(1).text();
                                 profile_name.setText(name);
 
                                 pro_id_no.setText(t.get(1).select("tr").get(0).select("td").get(1).text());
+                                id_sub.setText(t.get(1).select("tr").get(0).select("td").get(1).text());
                                 pro_date_of_b.setText(t.get(1).select("tr").get(2).select("td").get(1).text());
 
                                 pro_nationality.setText(t.get(2).select("tr").get(4).select("td").get(1).text());
@@ -236,9 +250,27 @@ public class ProfileActivity extends AppCompatActivity implements BottomSheetDia
 
                                     number = t.get(1).select("tr").get(5).select("td").get(1).select("input").attr("value");
                                     pro_number.setText(number);
+                                    telephoneBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            Intent intent = new Intent(Intent.ACTION_DIAL);
+                                            intent.setData(Uri.parse("tel:" + number));
+                                            startActivity(intent);
+                                        }
+                                    });
+
                                     alt_number = t.get(1).select("tr").get(6).select("td").get(1).select("input").attr("value");
                                     pro_alt_number.setText(alt_number);
+
                                     email = t.get(1).select("tr").get(7).select("td").get(1).select("input").attr("value");
+                                    emailBtn.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + email));
+                                            startActivity(Intent.createChooser(emailIntent, ""));
+                                        }
+                                    });
+
                                     pro_email.setText(email);
 
                                     birthC = t.get(2).select("tr").get(2).select("td").get(1).select("input").attr("value");

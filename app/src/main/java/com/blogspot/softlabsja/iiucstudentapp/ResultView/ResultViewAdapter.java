@@ -1,12 +1,21 @@
 package com.blogspot.softlabsja.iiucstudentapp.ResultView;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Environment;
+import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.blogspot.softlabsja.iiucstudentapp.R;
 import com.blogspot.softlabsja.iiucstudentapp.Table.TableViewListener;
 import com.blogspot.softlabsja.iiucstudentapp.Table.model.Cell;
@@ -18,6 +27,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +42,7 @@ public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.Vi
     ResultViewTableAdapter adapter;
 
     // Pass in the contact array into the constructor
-    public ResultViewAdapter(ArrayList<ResulteViewModels> mRegistrationModels,Context context) {
+    public ResultViewAdapter(ArrayList<ResulteViewModels> mRegistrationModels, Context context) {
         this.mRegistrationModels = mRegistrationModels;
         this.mContext = context;
     }
@@ -46,16 +60,16 @@ public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.Vi
         adapter = new ResultViewTableAdapter(mContext);
         holder.tableView.setAdapter(adapter);
         holder.tableView.setTableViewListener(new TableViewListener(holder.tableView));
-        int pos,pos2;
-        if(position == 0){
+        int pos, pos2;
+        if (position == 0) {
             pos = 2;
             pos2 = 1;
-        }else {
+        } else {
             pos = 1;
             pos2 = 0;
         }
 
-        String html = "<html><head><doc</title></head><body><table>"+mRegistrationModels.get(position).getRV_Data()+"</table></body></html>";
+        String html = "<html><head><doc</title></head><body><table>" + mRegistrationModels.get(position).getRV_Data() + "</table></body></html>";
         Document document = Jsoup.parse(html);
         Elements length = document.select("table > tbody");
 
@@ -63,11 +77,11 @@ public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.Vi
         Elements nSize = length.get(pos2).select("tr > td");
         String s1 = nSize.get(0).text();
         String s2 = nSize.get(1).text();
-        String toBeReplaced = s1.substring(s1.indexOf("S"), s1.indexOf(": ")+2);
+        String toBeReplaced = s1.substring(s1.indexOf("S"), s1.indexOf(": ") + 2);
         s1 = s1.replace(toBeReplaced, "");
-        String toBeReplaced2 = s2.substring(s2.indexOf("S"), s2.indexOf(": ")+2);
+        String toBeReplaced2 = s2.substring(s2.indexOf("S"), s2.indexOf(": ") + 2);
         s2 = s2.replace(toBeReplaced2, "");
-        holder.RV_semesterNo.setText(s1+":"+s2);
+        holder.RV_semesterNo.setText(s1 + ":" + s2);
         //--------------------------------------------------------------------------
 
         //----------------------Footer 3 number Data-------------------------------
@@ -83,9 +97,9 @@ public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.Vi
         List<List<Cell>> list = new ArrayList<>();
         Elements size = length.get(pos).select("tr");
         int k = 0;
-        for (int i=0;i<size.size()+2;i++){
+        for (int i = 0; i < size.size() + 2; i++) {
             List<Cell> cellList = new ArrayList<>();
-            if(i <= size.size()-1) {
+            if (i <= size.size() - 1) {
                 Elements size2 = size.get(i).select("td");
                 for (int j = 1; j < size2.size(); j++) {
                     Object data = size2.get(j).text();
@@ -95,14 +109,14 @@ public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.Vi
                     cell = new Cell(id, data);
                     cellList.add(cell);
                 }
-            }else {
+            } else {
                 Elements size2 = sizeF.get(k++).select("td");
-                for (int j = 0; j < size2.size()+1; j++) {
+                for (int j = 0; j < size2.size() + 1; j++) {
                     Object data;
-                    if(j < 1) {
-                         data = "";
-                    }else {
-                         data = size2.get(j-1).text();
+                    if (j < 1) {
+                        data = "";
+                    } else {
+                        data = size2.get(j - 1).text();
                     }
                     // Create dummy id.
                     String id = j + "-" + i;
@@ -123,12 +137,44 @@ public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.Vi
         }
 
         List<RowHeader> rowHeaderList = new ArrayList<>();
-        for (int i = 0; i < size.size()+2; i++) {
+        for (int i = 0; i < size.size() + 2; i++) {
             RowHeader header = new RowHeader(String.valueOf(i), (i + 1) + "");
             rowHeaderList.add(header);
         }
-        adapter.setAllItems(columnHeaders,rowHeaderList , list);
+        adapter.setAllItems(columnHeaders, rowHeaderList, list);
         //--------------------------------------------------------------------------
+
+        //holder.tableView.setDrawingCacheEnabled(true);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                // Assume block needs to be inside a Try/Catch block.
+                try {
+                    holder.tableView.setDrawingCacheEnabled(true);
+                    Bitmap bitmap = holder.tableView.getDrawingCache();
+                    Bitmap newBmp = bitmap.copy(bitmap.getConfig(),true);
+                    holder.tableView.setDrawingCacheEnabled(false);
+
+                    String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
+                    OutputStream fOut = null;
+                    Integer counter = 0;
+                    File file = new File(path, "FitnessGirl" + counter + ".jpg"); // the File to save , append increasing numeric counter to prevent files from getting overwritten.
+                    fOut = new FileOutputStream(file);
+
+                    newBmp.compress(Bitmap.CompressFormat.JPEG, 85, fOut); // saving the Bitmap to a file compressed as a JPEG with 85% compression rate
+                    fOut.flush(); // Not really required
+                    fOut.close(); // do not forget to close the stream
+                    MediaStore.Images.Media.insertImage(mContext.getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 5000);
+
     }
 
     @Override
@@ -137,8 +183,9 @@ public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView RV_semesterNo,RV_TRC,RV_TCC,RV_BC,RV_CGPA;
+        TextView RV_semesterNo, RV_TRC, RV_TCC, RV_BC, RV_CGPA;
         TableView tableView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             RV_semesterNo = itemView.findViewById(R.id.RV_semesterNo);
@@ -150,5 +197,18 @@ public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.Vi
 
             tableView = itemView.findViewById(R.id.RV_content_container);
         }
+    }
+
+    public static Bitmap getViewBitmap(View view) {
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(returnedBitmap);
+        Drawable bgDrawable = view.getBackground();
+        if (bgDrawable != null) {
+            bgDrawable.draw(canvas);
+        } else {
+            canvas.drawColor(Color.TRANSPARENT);
+        }
+        view.draw(canvas);
+        return returnedBitmap;
     }
 }

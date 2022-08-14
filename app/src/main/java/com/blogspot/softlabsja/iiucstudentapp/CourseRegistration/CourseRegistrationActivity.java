@@ -59,7 +59,7 @@ public class CourseRegistrationActivity extends AppCompatActivity {
     ImageView backBtn;
     MyTableViewAdapter adapter;
     TableView tableView;
-    TextView matric_no, semester_name, mobile_number, department, programm, semester_number, total_c, tch, notFound,extra,extra1;
+    TextView matric_no, semester_name, mobile_number, department, programm, semester_number, total_c, tch, notFound, extra, extra1;
     LinearLayout linearLayout, lll3;
     ContentLoadingProgressBar loading_CR;
 
@@ -77,7 +77,7 @@ public class CourseRegistrationActivity extends AppCompatActivity {
     ContentLoadingProgressBar cr_loading;
     LinearLayout ll_cr;
 
-    TextView h_1,h_2,h_3,h_4,h_5,h_6;
+    TextView h_1, h_2, h_3, h_4, h_5, h_6;
     String selected;
 
     @Override
@@ -222,13 +222,30 @@ public class CourseRegistrationActivity extends AppCompatActivity {
                                                         Registration(dashboard);
                                                     }
                                                 });
-                                            }else if (text.contains("This is not registration time or Registration time is over.")) {
-                                                loading_CR.hide();
-                                                notFound.setVisibility(View.VISIBLE);
-                                                notFound.setText(dashboard.select(".notification-box-error > center > b").text());
-                                                tableView.setVisibility(View.GONE);
-                                                linearLayout.setVisibility(View.GONE);
-                                                scrollView.setVisibility(View.GONE);
+                                            } else if (text.contains("This is not registration time or Registration time is over.")) {
+                                                runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        loading_CR.hide();
+                                                        notFound.setVisibility(View.VISIBLE);
+                                                        notFound.setText(dashboard.select(".notification-box-error > center > b").text());
+                                                        tableView.setVisibility(View.GONE);
+                                                        linearLayout.setVisibility(View.GONE);
+                                                        scrollView.setVisibility(View.GONE);
+                                                    }
+                                                });
+                                            } else if (text.contains("Your Payment Not Clear. If you already pay, please contact to ACFD to open block.")) {
+                                                runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        loading_CR.hide();
+                                                        notFound.setVisibility(View.VISIBLE);
+                                                        notFound.setText(dashboard.select(".notification-box-error > center > b").text());
+                                                        tableView.setVisibility(View.GONE);
+                                                        linearLayout.setVisibility(View.GONE);
+                                                        scrollView.setVisibility(View.GONE);
+                                                    }
+                                                });
                                             } else {
                                                 runOnUiThread(new Runnable() {
                                                     @Override
@@ -305,14 +322,17 @@ public class CourseRegistrationActivity extends AppCompatActivity {
                                                         for (int i = 0; i < tbody.size(); i++) {
                                                             if (i == 0) {
                                                                 Elements tbod = tbody.get(i).select("td");
-                                                                for (int j = 0; j < tbod.size(); j++) {
+                                                                //for (int j = 0; j < tbod.size(); j++) {
                                                                     matric_no.setText(tbod.get(0).text());
                                                                     semester_name.setText(tbod.get(2).text());
                                                                     mobile_number.setText(tbod.get(4).text());
                                                                     department.setText(tbod.get(1).text());
-                                                                    programm.setText(tbod.get(3).text());
-                                                                    semester_number.setText(tbod.get(5).text());
-                                                                }
+                                                                    programm.setText(tbod.get(5).text());
+                                                                    semester_number.setText(tbod.get(7).text());
+                                                                    extra.setVisibility(View.VISIBLE);
+                                                                    extra.setText(tbod.get(9).text());
+                                                                    //System.out.println("test:"+i+" "+j+tbod.get(j).text());
+                                                                //}
                                                             }
                                                         }
 
@@ -439,15 +459,15 @@ public class CourseRegistrationActivity extends AppCompatActivity {
         for (int i = 0; i < size; i++) {
             int checkSize = document.select("#tables > tbody").get(0).select("tr").get(i).select("td").size();
             if (checkSize > 1) {
-                if(document.select("#tables > tbody").get(0).select("tr").get(i-1).select("td").text().equals("Previous Failed Courses")){
+                if (document.select("#tables > tbody").get(0).select("tr").get(i - 1).select("td").text().equals("Previous Failed Courses")) {
                     courseState = "Previous Failed Courses";
-                }else if(document.select("#tables > tbody").get(0).select("tr").get(i-1).select("td").text().equals("New Offered Courses")){
+                } else if (document.select("#tables > tbody").get(0).select("tr").get(i - 1).select("td").text().equals("New Offered Courses")) {
                     courseState = "New Offered Courses";
-                }else if(document.select("#tables > tbody").get(0).select("tr").get(i-1).select("td").text().equals("Previous Missing Courses")){
+                } else if (document.select("#tables > tbody").get(0).select("tr").get(i - 1).select("td").text().equals("Previous Missing Courses")) {
                     courseState = "Previous Missing Courses";
-                }else if(document.select("#tables > tbody").get(0).select("tr").get(i-1).select("td").text().equals("Advanced Courses")){
+                } else if (document.select("#tables > tbody").get(0).select("tr").get(i - 1).select("td").text().equals("Advanced Courses")) {
                     courseState = "Advanced Courses";
-                }else if(document.select("#tables > tbody").get(0).select("tr").get(i-1).select("td").text().equals("Suggest for Improvement")){
+                } else if (document.select("#tables > tbody").get(0).select("tr").get(i - 1).select("td").text().equals("Suggest for Improvement")) {
                     courseState = "Suggest for Improvement";
                 }
 
@@ -472,7 +492,7 @@ public class CourseRegistrationActivity extends AppCompatActivity {
 
         }
 
-        CourseRegistrationAdapter adapter = new CourseRegistrationAdapter(arrayList,stringArrayList, CourseRegistrationActivity.this,h_1,h_2,h_3,h_4,h_5,h_6,selected,cr_submit_btn,this,cr_loading,student_id,eventValidation,matric__no,semester_id,max_credit);
+        CourseRegistrationAdapter adapter = new CourseRegistrationAdapter(arrayList, stringArrayList, CourseRegistrationActivity.this, h_1, h_2, h_3, h_4, h_5, h_6, selected, cr_submit_btn, this, cr_loading, student_id, eventValidation, matric__no, semester_id, max_credit);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(CourseRegistrationActivity.this));
         adapter.notifyDataSetChanged();

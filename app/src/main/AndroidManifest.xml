@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IIUCStudentApp">
-        <activity android:name=".Ter.CourseSurvey.CourseSurveyActivity"></activity>
+        <activity android:name=".Ter.CourseSurvey.CourseSurveyActivity"/>
         <activity android:name=".Ter.TerSubmission.TerSubmissionActivity" />
         <activity android:name=".Ter.TerActivity" />
         <activity android:name=".ForgetPassword.ForgetPasswordActivity" />
@@ -24,7 +24,7 @@
         <activity android:name=".ChangePassword.ChangePasswordActivity" />
         <activity android:name=".RegistrationSummary.RegistrationSummaryActivity" />
         <activity android:name=".ResultView.ResultViewActivity" />
-        <activity android:name=".About.AboutActivity" />
+        <activity android:name=".About.AboutActivity"/>
         <activity android:name=".AllNotice.NoticeViewActivity" />
         <activity android:name=".AllNotice.AllNoticeActivity" />
         <activity android:name=".CourseRegistration.CourseRegistrationActivity" />

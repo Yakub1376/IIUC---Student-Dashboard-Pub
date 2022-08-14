@@ -9,8 +9,8 @@ android {
         applicationId "com.blogspot.softlabsja.iiucstudentapp"
         minSdkVersion 17
         targetSdkVersion 32
-        versionCode 22
-        versionName "0.22"
+        versionCode 23
+        versionName "0.23"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -93,5 +93,9 @@ dependencies {
 
     //lottie
     implementation "com.airbnb.android:lottie:4.1.0"
+
+    implementation 'io.github.florent37:shapeofview:1.4.7'
+    implementation 'com.flaviofaria:kenburnsview:1.0.7'
+    implementation 'androidx.browser:browser:1.4.0'
 
 }

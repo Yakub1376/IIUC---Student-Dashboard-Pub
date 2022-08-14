@@ -222,6 +222,19 @@ public class AddDropActivity extends AppCompatActivity {
                                                         button_v.setVisibility(View.GONE);
                                                     }
                                                 });
+                                            } else if (text.contains("Your Payment Not Clear. If you already pay, please contact to ACFD to open block.")) {
+                                                runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        loading_CR.hide();
+                                                        notFound.setVisibility(View.VISIBLE);
+                                                        notFound.setText(dashboard.select(".notification-box-error > center > b").text());
+                                                        tableView.setVisibility(View.GONE);
+                                                        linearLayout.setVisibility(View.GONE);
+                                                        scrollView.setVisibility(View.GONE);
+                                                        button_v.setVisibility(View.GONE);
+                                                    }
+                                                });
                                             } else {
                                                 runOnUiThread(new Runnable() {
                                                     @Override
@@ -298,14 +311,17 @@ public class AddDropActivity extends AppCompatActivity {
                                                         for (int i = 0; i < tbody.size(); i++) {
                                                             if (i == 0) {
                                                                 Elements tbod = tbody.get(i).select("td");
-                                                                for (int j = 0; j < tbod.size(); j++) {
-                                                                    matric_no.setText(tbod.get(0).text());
-                                                                    semester_name.setText(tbod.get(2).text());
-                                                                    mobile_number.setText(tbod.get(4).text());
-                                                                    department.setText(tbod.get(1).text());
-                                                                    programm.setText(tbod.get(3).text());
-                                                                    semester_number.setText(tbod.get(5).text());
-                                                                }
+                                                                //for (int j = 0; j < tbod.size(); j++) {
+                                                                matric_no.setText(tbod.get(0).text());
+                                                                semester_name.setText(tbod.get(2).text());
+                                                                mobile_number.setText(tbod.get(4).text());
+                                                                department.setText(tbod.get(1).text());
+                                                                programm.setText(tbod.get(5).text());
+                                                                semester_number.setText(tbod.get(7).text());
+                                                                extra.setVisibility(View.VISIBLE);
+                                                                extra.setText(tbod.get(9).text());
+                                                                //System.out.println("test:"+i+" "+j+tbod.get(j).text());
+                                                                //}
                                                             }
                                                         }
 
