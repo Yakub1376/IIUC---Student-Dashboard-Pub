@@ -101,7 +101,7 @@ public class AllNoticeActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             try {
-                                Document doc = Jsoup.connect("https://www.iiuc.ac.bd/home/notice")
+                                Document doc = Jsoup.connect("https://www.iiuc.ac.bd/home/notice/")
                                         .userAgent(userAgent)
                                         .referrer("http://www.google.com")
                                         .get();
@@ -121,6 +121,14 @@ public class AllNoticeActivity extends AppCompatActivity {
                                                 Element notice = doc.select(".container-fluid > .col-lg-12 > a[href]").get(i);
                                                 //System.out.println(notice.attr("href"));
                                                 arrayList.add(new NoticeModel(notice.text(), notice.attr("href")));
+                                            }
+                                            if (arrayList.isEmpty()) {
+                                                length = doc.select(".subpage-content > .container-fluid > .row > .container > .col-sm-12 > .row");
+                                                for (int i = 0; i < length.size(); i++) {
+                                                    Element notice = doc.select(".subpage-content > .container-fluid > .row > .container > .col-sm-12 > .row > .container-fluid > .col-lg-12 > .col-sm-11 > div[style] > a[href]").get(i);
+                                                    //System.out.println(notice.attr("href"));
+                                                    arrayList.add(new NoticeModel(notice.text(), notice.attr("href")));
+                                                }
                                             }
 
                                             // Create adapter passing in the sample user data
@@ -193,6 +201,14 @@ public class AllNoticeActivity extends AppCompatActivity {
                                                 //System.out.println(notice.attr("href"));
                                                 arrayList.add(new NoticeModel(notice.text(), notice.attr("href")));
                                             }
+                                            if (arrayList.isEmpty()) {
+                                                length = doc.select(".subpage-content > .container-fluid > .row > .container > .col-sm-12 > .row");
+                                                for (int i = 0; i < length.size(); i++) {
+                                                    Element notice = doc.select(".subpage-content > .container-fluid > .row > .container > .col-sm-12 > .row > .container-fluid > .col-lg-12 > .col-sm-11 > div[style] > a[href]").get(i);
+                                                    //System.out.println(notice.attr("href"));
+                                                    arrayList.add(new NoticeModel(notice.text(), notice.attr("href")));
+                                                }
+                                            }
 
                                             // Create adapter passing in the sample user data
                                             NoticeAdapter adapter = new NoticeAdapter(arrayList, AllNoticeActivity.this);
@@ -264,7 +280,14 @@ public class AllNoticeActivity extends AppCompatActivity {
                                                 //System.out.println(notice.attr("href"));
                                                 arrayList.add(new NoticeModel(notice.text(), notice.attr("href")));
                                             }
-
+                                            if (arrayList.isEmpty()) {
+                                                length = doc.select(".subpage-content > .container-fluid > .row > .container > .col-sm-12 > .row");
+                                                for (int i = 0; i < length.size(); i++) {
+                                                    Element notice = doc.select(".subpage-content > .container-fluid > .row > .container > .col-sm-12 > .row > .container-fluid > .col-lg-12 > .col-sm-11 > div[style] > a[href]").get(i);
+                                                    //System.out.println(notice.attr("href"));
+                                                    arrayList.add(new NoticeModel(notice.text(), notice.attr("href")));
+                                                }
+                                            }
                                             // Create adapter passing in the sample user data
                                             NoticeAdapter adapter = new NoticeAdapter(arrayList, AllNoticeActivity.this);
                                             // Attach the adapter to the recyclerview to populate items
