@@ -34,7 +34,7 @@ public class AllNoticeActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     ImageView backBtn;
-    TextView titelN;
+    TextView titleN;
     SwipeRefreshLayout refreshLayout;
     ContentLoadingProgressBar loading_AN;
 
@@ -44,7 +44,7 @@ public class AllNoticeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_notice);
 
         backBtn = findViewById(R.id.backBtn);
-        titelN = findViewById(R.id.titelN);
+        titleN = findViewById(R.id.titelN);
 
         viewPager = findViewById(R.id.tab_ViewPager);
         refreshLayout = findViewById(R.id.swipe);
@@ -131,13 +131,10 @@ public class AllNoticeActivity extends AppCompatActivity {
                                                 }
                                             }
 
-                                            // Create adapter passing in the sample user data
-                                            NoticeAdapter adapter = new NoticeAdapter(arrayList, AllNoticeActivity.this);
-                                            // Attach the adapter to the recyclerview to populate items
-                                            recyclerView.setAdapter(adapter);
-                                            // Set layout manager to position the items
-                                            recyclerView.setLayoutManager(new LinearLayoutManager(AllNoticeActivity.this));
 
+                                            NoticeAdapter adapter = new NoticeAdapter(arrayList, AllNoticeActivity.this);
+                                            recyclerView.setAdapter(adapter);
+                                            recyclerView.setLayoutManager(new LinearLayoutManager(AllNoticeActivity.this));
                                             adapter.notifyDataSetChanged();
 
                                             searchView.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
@@ -210,13 +207,9 @@ public class AllNoticeActivity extends AppCompatActivity {
                                                 }
                                             }
 
-                                            // Create adapter passing in the sample user data
                                             NoticeAdapter adapter = new NoticeAdapter(arrayList, AllNoticeActivity.this);
-                                            // Attach the adapter to the recyclerview to populate items
                                             recyclerView.setAdapter(adapter);
-                                            // Set layout manager to position the items
                                             recyclerView.setLayoutManager(new LinearLayoutManager(AllNoticeActivity.this));
-
                                             adapter.notifyDataSetChanged();
 
                                             searchView2.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -288,13 +281,9 @@ public class AllNoticeActivity extends AppCompatActivity {
                                                     arrayList.add(new NoticeModel(notice.text(), notice.attr("href")));
                                                 }
                                             }
-                                            // Create adapter passing in the sample user data
                                             NoticeAdapter adapter = new NoticeAdapter(arrayList, AllNoticeActivity.this);
-                                            // Attach the adapter to the recyclerview to populate items
                                             recyclerView.setAdapter(adapter);
-                                            // Set layout manager to position the items
                                             recyclerView.setLayoutManager(new LinearLayoutManager(AllNoticeActivity.this));
-
                                             adapter.notifyDataSetChanged();
 
                                             searchView3.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -341,7 +330,6 @@ public class AllNoticeActivity extends AppCompatActivity {
         models.add(new NavigationTabBar.Model.Builder(
                         ContextCompat.getDrawable(this, R.drawable.ic_notice),
                         Color.parseColor(colors[0]))
-//              .selectedIcon(getResources().getDrawable(R.drawable.ic_sixth))
                         .title("Notice")
                         .build()
         );

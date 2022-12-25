@@ -68,7 +68,6 @@ public class AddDropAdapter extends RecyclerView.Adapter<AddDropAdapter.ViewHold
     Dialog dialog;
     String ss3;
 
-    // Pass in the contact array into the constructor
     public AddDropAdapter(ArrayList<AddDropModel> addDropModels, ArrayList<String> CourseSubOptionModel, Context context,
                           TextView h_1, TextView h_2, TextView h_3, TextView h_4,
                           TextView h_5, TextView h_6, Button submitBtn,
@@ -359,7 +358,7 @@ public class AddDropAdapter extends RecyclerView.Adapter<AddDropAdapter.ViewHold
 
 
     private void submit() {
-
+        //have some problems
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {

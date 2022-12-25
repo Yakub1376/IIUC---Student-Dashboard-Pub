@@ -19,28 +19,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.blogspot.softlabsja.iiucstudentapp.ChangePassword.ChangePasswordActivity;
 import com.blogspot.softlabsja.iiucstudentapp.LoginAndCookies.Cookies;
 import com.blogspot.softlabsja.iiucstudentapp.LoginAndCookies.UpdateSession;
 import com.blogspot.softlabsja.iiucstudentapp.R;
-import com.blogspot.softlabsja.iiucstudentapp.helperClassFirebase;
-import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.github.chrisbanes.photoview.PhotoView;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.wang.avi.AVLoadingIndicatorView;
-
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity implements BottomSheetDialog.BottomSheetListener {

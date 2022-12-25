@@ -129,15 +129,14 @@ public class MainActivity extends AppCompatActivity {
     LogIn logIn = new LogIn();
 
     FirebaseDatabase database;
-    DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
 
     RelativeLayout shut_down, myEmail_M, updateNow;
     TextView shutDownTxt;
 
 
-    private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-    private Handler handler = new Handler();
+    private final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private final Handler handler = new Handler();
     private Runnable runnable;
 
     TextView r1;
@@ -188,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
 //---------------------------------------- Write a message to the database-----------------------------------------
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        databaseReference = database.getReference("user");
 //-------------------------------------------------------------------------------------------------------------------
 
         shut_down.setVisibility(View.GONE);
@@ -229,8 +227,6 @@ public class MainActivity extends AppCompatActivity {
                                 public void onDataChange(@NotNull DataSnapshot dataSnapshot) {
                                     String value = dataSnapshot.getValue(String.class);
                                     if (value.equals("jaber")) {
-                                        //myData();
-                                        //shut_down.setVisibility(View.GONE);
                                         String versionName = BuildConfig.VERSION_NAME;
                                         DatabaseReference reference1 = database.getReference("version");
                                         reference1.addValueEventListener(new ValueEventListener() {
@@ -253,7 +249,6 @@ public class MainActivity extends AppCompatActivity {
 
                                             @Override
                                             public void onCancelled(@NotNull DatabaseError error) {
-                                                // Failed to read value
                                                 //Toast.makeText(MainActivity.this, error.toException() + "", Toast.LENGTH_SHORT).show();
                                             }
                                         });
@@ -270,7 +265,6 @@ public class MainActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onCancelled(@NotNull DatabaseError error) {
-                                    // Failed to read value
                                     //Toast.makeText(MainActivity.this, error.toException() + "", Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -402,8 +396,7 @@ public class MainActivity extends AppCompatActivity {
                                 editor.putString("iiucwb_user_id", "");
                                 editor.putString("iiucwb_user_verification", "");
                                 editor.apply();
-//                                FirebaseUser user = mAuth.getCurrentUser();
-//                                user.delete();
+
                                 Intent intent = new Intent(MainActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 finish();
@@ -747,15 +740,11 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 //---------------------------------------Timer-------------------------------------------------
-                    //String EVENT_DATE_TIME = "2021-12-31 10:30:00";
-
                     Elements scriptElements = dashboard.getElementsByTag("script");
                     for (Element element : scriptElements) {
                         if (element.data().contains("countDownDate")) {
-                            // find the line which contains 'infosite.token = <...>;'
                             Pattern pattern = Pattern.compile(".*countDownDate = ([^;]*);");
                             Matcher matcher = pattern.matcher(element.data());
-                            // we only expect a single match here so there's no need to loop through the matcher's groups
                             if (matcher.find()) {
                                 getDate = matcher.group(1);
                                 getDate = getDate.replaceAll(".getTime\\(\\)", "");
@@ -767,10 +756,6 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         }
                     }
-//                    String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
-//                    System.out.println(getDate+" "+currentTime);
-
-
 //---------------------------------------------------------------------------------------------
 
                     Elements r13 = dashboard.select(".bg-warning > div");
@@ -870,7 +855,6 @@ public class MainActivity extends AppCompatActivity {
                                 for (int j = 0; j < 2; j++) {
                                     Elements ro = tab1default.select("td");
                                     Object text = ro.get(j).text();
-                                    // Create dummy id.
                                     String id = j + "-" + i;
                                     Cell cell;
                                     cell = new Cell(id, text);
@@ -881,7 +865,6 @@ public class MainActivity extends AppCompatActivity {
                                 List<Cell> cellList = new ArrayList<>();
                                 for (int j = 0; j < 2; j++) {
                                     Object text = "";
-                                    // Create dummy id.
                                     String id = j + "-" + i;
                                     Cell cell;
                                     cell = new Cell(id, text);
@@ -897,7 +880,6 @@ public class MainActivity extends AppCompatActivity {
                             for (int j = 0; j < 2; j++) {
                                 Elements ro = tab1default.select("td");
                                 Object text = ro.get(j).text();
-                                // Create dummy id.
                                 String id = j + "-" + i;
                                 Cell cell;
                                 cell = new Cell(id, text);
@@ -954,7 +936,6 @@ public class MainActivity extends AppCompatActivity {
                                 for (int j = 0; j < 2; j++) {
                                     Elements ro = tab1default.select("td");
                                     Object text = ro.get(j).text();
-                                    // Create dummy id.
                                     String id = j + "-" + i;
                                     Cell cell;
                                     cell = new Cell(id, text);
@@ -965,7 +946,6 @@ public class MainActivity extends AppCompatActivity {
                                 List<Cell> cellList = new ArrayList<>();
                                 for (int j = 0; j < 2; j++) {
                                     Object text = "";
-                                    // Create dummy id.
                                     String id = j + "-" + i;
                                     Cell cell;
                                     cell = new Cell(id, text);
@@ -981,7 +961,6 @@ public class MainActivity extends AppCompatActivity {
                             for (int j = 0; j < 2; j++) {
                                 Elements ro = tab1default.select("td");
                                 Object text = ro.get(j).text();
-                                // Create dummy id.
                                 String id = j + "-" + i;
                                 Cell cell;
                                 cell = new Cell(id, text);
@@ -1038,7 +1017,6 @@ public class MainActivity extends AppCompatActivity {
                             for (int j = 0; j < 2; j++) {
                                 Elements ro = tab1default.select("td");
                                 Object text = ro.get(j).text();
-                                // Create dummy id.
                                 String id = j + "-" + i;
                                 Cell cell;
                                 cell = new Cell(id, text);
@@ -1140,7 +1118,6 @@ public class MainActivity extends AppCompatActivity {
                     }
 
 
-//
                     List<List<Cell>> list = new ArrayList<>();
                     Elements length = dashboard.select("#tab-3 tr");
                     for (int i = 0; i < length.size() - 1; i++) {
@@ -1149,7 +1126,6 @@ public class MainActivity extends AppCompatActivity {
                         for (int j = 1; j < 6; j++) {
                             Elements ro = c24.select("td");
                             Object text = ro.get(j).text();
-                            // Create dummy id.
                             String id = j + "-" + i;
                             Cell cell;
                             cell = new Cell(id, text);
@@ -1174,7 +1150,6 @@ public class MainActivity extends AppCompatActivity {
                 new NavigationTabBar.Model.Builder(
                         ContextCompat.getDrawable(this, R.drawable.ic_home),
                         Color.parseColor(colors[0]))
-//                        .selectedIcon(getResources().getDrawable(R.drawable.ic_sixth))
                         .title("Home")
                         .build()
         );
@@ -1222,8 +1197,6 @@ public class MainActivity extends AppCompatActivity {
         initUI(dashboard);
         verifyBox.setVisibility(View.GONE);
         mainBox.setVisibility(View.VISIBLE);
-        PushD pushD = new PushD(MainActivity.this);
-        pushD.save();
     }
 
     public void login() {
@@ -1319,7 +1292,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
-                    // Perform a search
                     if (manager.isActive()) {
                         manager.hideSoftInputFromWindow(studentPass.getApplicationWindowToken(), 0);
                     }
@@ -1417,7 +1389,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
                 if (keyCode == KeyEvent.KEYCODE_ENTER && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
-                    // Perform a search
                     if (manager.isActive()) {
                         manager.hideSoftInputFromWindow(verificationEt.getApplicationWindowToken(), 0);
                     }
@@ -1683,13 +1654,11 @@ public class MainActivity extends AppCompatActivity {
     public void hide() {
         loading.hide();
         f = 1;
-        // or loading.smoothToHide();
     }
 
     public void show() {
         loading.show();
         f = 0;
-        // or loading.smoothToShow();
     }
 
     public void showMesseg(String s) {
@@ -1739,7 +1708,6 @@ public class MainActivity extends AppCompatActivity {
                         long Hours = diff / (60 * 60 * 1000) % 24;
                         long Minutes = diff / (60 * 1000) % 60;
                         long Seconds = diff / 1000 % 60;
-                        //
                         r1.setText(s + " " + String.format("%02d", Days) + "Days " + String.format("%02d", Hours) + "H " + String.format("%02d", Minutes) + "M " + String.format("%02d", Seconds) + "S");
                         //System.out.println(String.format("%02d", Seconds));
                     } else {

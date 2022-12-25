@@ -18,7 +18,7 @@ import com.evrencoskun.tableview.adapter.recyclerview.holder.AbstractViewHolder;
 
 public class ResultViewTableAdapter extends AbstractTableAdapter<ColumnHeader, RowHeader, Cell> {
     Context mContext;
-    // Pass in the contact array into the constructor
+
     public ResultViewTableAdapter(Context context) {
         this.mContext = context;
     }

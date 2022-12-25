@@ -24,7 +24,6 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
     ArrayList<NoticeModel> allNoticeModel;
     Context mContext;
 
-    // Pass in the contact array into the constructor
     public NoticeAdapter(ArrayList<NoticeModel> noticeModels,Context context) {
         this.mnoticeModels = noticeModels;
         this.mContext = context;
@@ -34,7 +33,6 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View contactView = inflater.inflate(R.layout.item_notice, parent, false);
         ViewHolder viewHolder = new ViewHolder(contactView);

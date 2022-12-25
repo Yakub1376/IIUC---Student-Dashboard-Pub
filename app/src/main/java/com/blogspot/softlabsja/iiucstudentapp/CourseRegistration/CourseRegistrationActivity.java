@@ -195,8 +195,6 @@ public class CourseRegistrationActivity extends AppCompatActivity {
                             @Override
                             public void run() {
 
-                                //getDataForSpinner();
-
                                 linearLayout.setVisibility(View.VISIBLE);
 
                                 url = "https://www.iiuc.ac.bd/basic/student-course-offer/" + student_id + "/" + semester_id;
@@ -302,7 +300,6 @@ public class CourseRegistrationActivity extends AppCompatActivity {
                                                                     for (int j = 1; j < 9 - 1; j++) {
                                                                         Elements ro = c24.select("td");
                                                                         Object text = ro.get(j).text();
-                                                                        // Create dummy id.
                                                                         String id = j + "-" + i;
                                                                         Cell cell;
                                                                         cell = new Cell(id, text);

@@ -51,7 +51,6 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
     ContentLoadingProgressBar loadingBtn_Bo;
     Activity activity;
     LinearLayout BirthLL;
-    // Pass in the contact array into the constructor
     public BottomSheetDialog(String number, String alt_number, String email, String birthC, String nationalID, Activity activity) {
         this.number = number;
         this.alt_number = alt_number;

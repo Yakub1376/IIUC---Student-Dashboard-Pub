@@ -22,6 +22,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7be4b9ba3bc845a8103d65141d0120d8/jetified-pdfium-android-1.9.0/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7be4b9ba3bc845a8103d65141d0120d8/jetified-pdfium-android-1.9.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7be4b9ba3bc845a8103d65141d0120d8/jetified-pdfium-android-1.9.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/43a3d091a9fe17891c2f096a1c882692/jetified-pdfium-android-1.9.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/43a3d091a9fe17891c2f096a1c882692/jetified-pdfium-android-1.9.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/43a3d091a9fe17891c2f096a1c882692/jetified-pdfium-android-1.9.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.barteksc/pdfium-android/1.9.0/a9e3efce867c5e49a12afa7f5ab4c24a94b1f2e1/pdfium-android-1.9.0-javadoc.jar!/" />

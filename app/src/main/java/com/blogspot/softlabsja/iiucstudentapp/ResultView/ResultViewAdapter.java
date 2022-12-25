@@ -5,33 +5,21 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Environment;
-import android.os.Handler;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.blogspot.softlabsja.iiucstudentapp.R;
 import com.blogspot.softlabsja.iiucstudentapp.Table.TableViewListener;
 import com.blogspot.softlabsja.iiucstudentapp.Table.model.Cell;
 import com.blogspot.softlabsja.iiucstudentapp.Table.model.ColumnHeader;
 import com.blogspot.softlabsja.iiucstudentapp.Table.model.RowHeader;
 import com.evrencoskun.tableview.TableView;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +29,6 @@ public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.Vi
     Context mContext;
     ResultViewTableAdapter adapter;
 
-    // Pass in the contact array into the constructor
     public ResultViewAdapter(ArrayList<ResulteViewModels> mRegistrationModels, Context context) {
         this.mRegistrationModels = mRegistrationModels;
         this.mContext = context;
@@ -103,7 +90,6 @@ public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.Vi
                 Elements size2 = size.get(i).select("td");
                 for (int j = 1; j < size2.size(); j++) {
                     Object data = size2.get(j).text();
-                    // Create dummy id.
                     String id = j + "-" + i;
                     Cell cell;
                     cell = new Cell(id, data);
@@ -118,7 +104,6 @@ public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.Vi
                     } else {
                         data = size2.get(j - 1).text();
                     }
-                    // Create dummy id.
                     String id = j + "-" + i;
                     Cell cell;
                     cell = new Cell(id, data);
@@ -145,35 +130,35 @@ public class ResultViewAdapter extends RecyclerView.Adapter<ResultViewAdapter.Vi
         //--------------------------------------------------------------------------
 
         //holder.tableView.setDrawingCacheEnabled(true);
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                // Do something after 5s = 5000ms
-                // Assume block needs to be inside a Try/Catch block.
-                try {
-                    holder.tableView.setDrawingCacheEnabled(true);
-                    Bitmap bitmap = holder.tableView.getDrawingCache();
-                    Bitmap newBmp = bitmap.copy(bitmap.getConfig(),true);
-                    holder.tableView.setDrawingCacheEnabled(false);
-
-                    String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
-                    OutputStream fOut = null;
-                    Integer counter = 0;
-                    File file = new File(path, "FitnessGirl" + counter + ".jpg"); // the File to save , append increasing numeric counter to prevent files from getting overwritten.
-                    fOut = new FileOutputStream(file);
-
-                    newBmp.compress(Bitmap.CompressFormat.JPEG, 85, fOut); // saving the Bitmap to a file compressed as a JPEG with 85% compression rate
-                    fOut.flush(); // Not really required
-                    fOut.close(); // do not forget to close the stream
-                    MediaStore.Images.Media.insertImage(mContext.getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, 5000);
+//        final Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                // Do something after 5s = 5000ms
+//                // Assume block needs to be inside a Try/Catch block.
+//                try {
+//                    holder.tableView.setDrawingCacheEnabled(true);
+//                    Bitmap bitmap = holder.tableView.getDrawingCache();
+//                    Bitmap newBmp = bitmap.copy(bitmap.getConfig(),true);
+//                    holder.tableView.setDrawingCacheEnabled(false);
+//
+//                    String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
+//                    OutputStream fOut = null;
+//                    Integer counter = 0;
+//                    File file = new File(path, "FitnessGirl" + counter + ".jpg"); // the File to save , append increasing numeric counter to prevent files from getting overwritten.
+//                    fOut = new FileOutputStream(file);
+//
+//                    newBmp.compress(Bitmap.CompressFormat.JPEG, 85, fOut); // saving the Bitmap to a file compressed as a JPEG with 85% compression rate
+//                    fOut.flush(); // Not really required
+//                    fOut.close(); // do not forget to close the stream
+//                    MediaStore.Images.Media.insertImage(mContext.getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, 5000);
 
     }
 

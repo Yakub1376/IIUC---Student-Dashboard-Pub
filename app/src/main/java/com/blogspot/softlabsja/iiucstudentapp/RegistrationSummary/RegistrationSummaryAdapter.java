@@ -20,7 +20,7 @@ public class RegistrationSummaryAdapter extends RecyclerView.Adapter<Registratio
 
     ArrayList<RegistrationSummaryModel> mRegistrationModels;
     Context mContext;
-    // Pass in the contact array into the constructor
+
     public RegistrationSummaryAdapter(ArrayList<RegistrationSummaryModel> mRegistrationModels, Context context) {
         this.mRegistrationModels = mRegistrationModels;
         this.mContext = context;

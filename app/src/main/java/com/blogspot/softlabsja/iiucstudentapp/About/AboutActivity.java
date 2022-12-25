@@ -154,7 +154,7 @@ public class AboutActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NotNull DatabaseError databaseError) {
-                        //handle databaseError
+                        //databaseError
                     }
                 });
 

@@ -76,11 +76,9 @@ public class RegistrationSummaryActivity extends AppCompatActivity {
                                             length.get(i).select("td").get(10)
                                     ));
                                 }
-                                // Create adapter passing in the sample user data
+
                                 RegistrationSummaryAdapter adapter = new RegistrationSummaryAdapter(arrayList, RegistrationSummaryActivity.this);
-                                // Attach the adapter to the recyclerview to populate items
                                 recyclerView.setAdapter(adapter);
-                                // Set layout manager to position the items
                                 recyclerView.setLayoutManager(new LinearLayoutManager(RegistrationSummaryActivity.this));
                                 adapter.notifyDataSetChanged();
                             }

@@ -182,8 +182,6 @@ public class AddDropActivity extends AppCompatActivity {
                             @Override
                             public void run() {
 
-                                //getDataForSpinner();
-
                                 linearLayout.setVisibility(View.VISIBLE);
 
                                 url = "https://www.iiuc.ac.bd/basic/student-add-drop/" + student_id + "/" + semester_id;
@@ -291,7 +289,6 @@ public class AddDropActivity extends AppCompatActivity {
                                                                     for (int j = 1; j < 9 - 1; j++) {
                                                                         Elements ro = c24.select("td");
                                                                         Object text = ro.get(j).text();
-                                                                        // Create dummy id.
                                                                         String id = j + "-" + i;
                                                                         Cell cell;
                                                                         cell = new Cell(id, text);
@@ -311,7 +308,6 @@ public class AddDropActivity extends AppCompatActivity {
                                                         for (int i = 0; i < tbody.size(); i++) {
                                                             if (i == 0) {
                                                                 Elements tbod = tbody.get(i).select("td");
-                                                                //for (int j = 0; j < tbod.size(); j++) {
                                                                 matric_no.setText(tbod.get(0).text());
                                                                 semester_name.setText(tbod.get(2).text());
                                                                 mobile_number.setText(tbod.get(4).text());
@@ -320,8 +316,6 @@ public class AddDropActivity extends AppCompatActivity {
                                                                 semester_number.setText(tbod.get(7).text());
                                                                 extra.setVisibility(View.VISIBLE);
                                                                 extra.setText(tbod.get(9).text());
-                                                                //System.out.println("test:"+i+" "+j+tbod.get(j).text());
-                                                                //}
                                                             }
                                                         }
 

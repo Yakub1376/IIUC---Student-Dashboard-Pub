@@ -4,24 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.blogspot.softlabsja.iiucstudentapp.LoginAndCookies.Cookies;
 import com.blogspot.softlabsja.iiucstudentapp.LoginAndCookies.UpdateSession;
 import com.blogspot.softlabsja.iiucstudentapp.R;
-import com.blogspot.softlabsja.iiucstudentapp.helperClassFirebase;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
 import java.util.ArrayList;
 

@@ -31,7 +31,6 @@ public class CourseStatusAdapter extends RecyclerView.Adapter<CourseStatusAdapte
     Context mContext;
     CourseStatusTableAdapter adapter;
 
-    // Pass in the contact array into the constructor
     public CourseStatusAdapter(ArrayList<CourseStatusModel> courseStatusModels, Context context) {
         this.courseStatusModels = courseStatusModels;
         this.mContext = context;
